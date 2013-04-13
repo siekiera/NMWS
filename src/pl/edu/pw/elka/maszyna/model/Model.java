@@ -27,7 +27,7 @@ public class Model
 		//to powinno podzielić tekst na linie
 		String zdania[] = tekstWejsciowy.split("\\r?\\n");
 		//lista drzew
-		List<Drzewo> las = new ArrayList<>(); 
+		List<Drzewo> las = new ArrayList<Drzewo>(); 
 		
 		for(String zdanie : zdania)
 		{

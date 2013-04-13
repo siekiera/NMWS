@@ -1,0 +1,8 @@
+<project default="Run">
+	<target name="Compile"> 
+		<javac srcdir="src" destdir="build"/>
+	</target> 
+	<target name="Run" depends="Compile">
+		<java fork="yes" classname="pl.edu.pw.elka.maszyna.Maszyna" classpath="build" dir="build"/>
+	</target>
+</project>

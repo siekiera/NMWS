@@ -26,7 +26,7 @@ public class Kontroler
 	 */
 	public Kontroler()
 	{
-		this.kolejkaZdarzen = new LinkedBlockingQueue<>();		
+		this.kolejkaZdarzen = new LinkedBlockingQueue<ZdarzenieWidoku>();		
 		
 		this.widok = new Widok(this.kolejkaZdarzen);
 		this.model = new Model();
