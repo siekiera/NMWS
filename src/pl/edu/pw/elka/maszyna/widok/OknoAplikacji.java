@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 class OknoAplikacji extends JFrame
 {
 	private static final long serialVersionUID = -5580453288877473242L;
-	private static final Dimension ROZMIAR = new Dimension(800, 600);
+	private static final Dimension ROZMIAR = new Dimension(500, 350);
 	
 	private final BlockingQueue<ZdarzenieWidoku> kolejkaZdarzen;
 	

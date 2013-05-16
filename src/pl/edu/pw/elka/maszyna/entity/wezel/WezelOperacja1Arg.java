@@ -18,4 +18,10 @@ public class WezelOperacja1Arg extends WezelOperacja
     {
         return dziecko;
     }
+    
+    @Override
+    public String toString() {
+    	return dzialanie.getZnak() + dziecko.toString();
+    }
+    
 }

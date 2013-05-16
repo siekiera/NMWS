@@ -56,15 +56,18 @@ public class DrzewoParsowania
         System.out.println(korzenDrzewa.toString());
     }
 
-    private Wezel budujDrzewo(String napis) {
+    private Wezel budujDrzewo(final String napis) {
 
         int index = szukajNajwyzszyPriorytet(napis);
         if(index == -1)
         {
+        	if(napis.length() > 0 && napis.charAt(0) == '(')
+        	{
+        		return budujDrzewo(napis.substring(1, napis.length() - 1));
+        	}
             WezelPredykat wezelPredykat = new WezelPredykat(napis);
             System.out.println("Nie ma operatorow: " + napis);
             return wezelPredykat;
-
         }
         else {
             Dzialanie dzialanie = dzialania.get(napis.charAt(index));
@@ -138,5 +141,6 @@ public class DrzewoParsowania
         return Character.isWhitespace(symbol);
     }
 
-
+    
+    
 }

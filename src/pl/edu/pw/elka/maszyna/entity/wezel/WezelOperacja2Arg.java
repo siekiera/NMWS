@@ -28,4 +28,10 @@ public class WezelOperacja2Arg extends WezelOperacja
     {
         return prawy;
     }
+    
+    @Override
+    public String toString() {
+    	return lewy.toString() + dzialanie.getZnak() + prawy.toString();
+    }
+    
 }

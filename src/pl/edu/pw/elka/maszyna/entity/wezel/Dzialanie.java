@@ -10,4 +10,10 @@ public enum Dzialanie
     {
         this.znak = znak;
     }
+
+	public char getZnak() {
+		return znak;
+	}
+    
+    
 }

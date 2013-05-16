@@ -18,4 +18,10 @@ public class WezelPredykat extends Wezel
     {
         return predykat;
     }
+    
+    @Override
+    public String toString() {
+    	return predykat;
+    }
+    
 }
