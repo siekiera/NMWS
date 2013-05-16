@@ -3,7 +3,7 @@ package pl.edu.pw.elka.maszyna.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.edu.pw.elka.maszyna.entity.Drzewo;
+import pl.edu.pw.elka.maszyna.entity.DrzewoParsowania;
 import pl.edu.pw.elka.maszyna.entity.Klauzula;
 
 /**
@@ -27,12 +27,12 @@ public class Model
 		//to powinno podzielić tekst na linie
 		String zdania[] = tekstWejsciowy.split("\\r?\\n");
 		//lista drzew
-		List<Drzewo> las = new ArrayList<Drzewo>(); 
+		List<DrzewoParsowania> las = new ArrayList<DrzewoParsowania>();
 		
 		for(String zdanie : zdania)
 		{
 			//parsujemy
-			las.add(new Drzewo(zdanie));
+			las.add(new DrzewoParsowania(zdanie));
 			//TODO jeśli nie uda się sparsować, to pewnie powinno rzucać jakimś wyjątkiem
 		}
 		
@@ -50,7 +50,7 @@ public class Model
 	 * @param las
 	 * @return
 	 */
-	private List<Klauzula> drzewaNaKlauzule(final List<Drzewo> las)
+	private List<Klauzula> drzewaNaKlauzule(final List<DrzewoParsowania> las)
 	{
 		//TODO zrobić
 		return null;

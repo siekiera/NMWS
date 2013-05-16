@@ -10,13 +10,11 @@ public class Predykat
 	/** nazwa predykatu - drukowanymi literami*/
 	private final String nazwa;
 	private final List<Argument> argumenty;
-	private boolean zaprzeczony;
-	public Predykat(String nazwa, List<Argument> argumenty, boolean zaprzeczony)
+	public Predykat(String nazwa, List<Argument> argumenty)
 	{
 		super();
 		this.nazwa = nazwa;
 		this.argumenty = argumenty;
-		this.zaprzeczony = zaprzeczony;
 	}
 	
 
