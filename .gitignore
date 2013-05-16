@@ -1,5 +1,7 @@
 build/
+.idea/
 *.class
 .classpath
 .project
 .settings
+.iml
