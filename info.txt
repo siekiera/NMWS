@@ -1,0 +1,1 @@
+W klasie predykat potrzebuję pola, które mówi czy predykat jest zaprzeczony czy nie. Będzie to niezbędne w algorytmie wnioskowania.
