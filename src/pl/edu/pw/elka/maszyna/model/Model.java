@@ -3,12 +3,14 @@ package pl.edu.pw.elka.maszyna.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.edu.pw.elka.maszyna.entity.DrzewoParsowania;
-import pl.edu.pw.elka.maszyna.entity.Klauzula;
+import pl.edu.pw.elka.maszyna.entity.algorytm.ListaKlauzul;
+import pl.edu.pw.elka.maszyna.entity.parser.DrzewoParsowania;
+import pl.edu.pw.elka.maszyna.entity.algorytm.Klauzula;
+import sun.security.krb5.internal.KrbErrException;
 
 /**
  * Model MVC
- * @author siekiera
+ * @author Michał Toporowski
  */
 public class Model
 {
@@ -37,33 +39,14 @@ public class Model
 		}
 		
 		//przerabiamy drzewa na klauzule
-		List<Klauzula> klauzule = drzewaNaKlauzule(las);
+        KreatorKlauzul kreatorKlauzul = new KreatorKlauzul();
+		ListaKlauzul listaKlauzul = kreatorKlauzul.drzewaNaKlauzule(las);
 		//wnioskujemy
-		wnioskuj(klauzule);
+        ModulWnioskowania modulWnioskowania = new ModulWnioskowania();
+        modulWnioskowania.wnioskuj(listaKlauzul);
+        modulWnioskowania.pobierzDrzewoWnioskowania();
 		
 		//TODO no i teraz to pewnie powinno coś zwrócić, tudzież zakomunikować, że się udało lub nie
 		
-	}
-	
-	/**
-	 * Przerabia wyrażenie w postaci drzewa na listę klauzul
-	 * @param las
-	 * @return
-	 */
-	private List<Klauzula> drzewaNaKlauzule(final List<DrzewoParsowania> las)
-	{
-		//TODO zrobić
-		return null;
-	}
-	
-	
-	/**
-	 * Nasz algorytm
-	 * @param listaKlauzul
-	 */
-	private void wnioskuj(final List<Klauzula> listaKlauzul)
-	{
-		//TODO zrobić
-		//TODO może to też powinno coś zwracać, na razie nie wiem co
 	}
 }

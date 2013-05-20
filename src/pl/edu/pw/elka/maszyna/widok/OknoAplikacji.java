@@ -12,6 +12,9 @@ import javax.swing.JTextArea;
 
 /**
  * Główne okno aplikacji
+ * @author Michał Toporowski
+ * @author Bogdan Szkoła
+ * @author Łukasz Pielaszek
  */
 class OknoAplikacji extends JFrame
 {

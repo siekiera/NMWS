@@ -1,9 +1,13 @@
-package pl.edu.pw.elka.maszyna.entity;
+package pl.edu.pw.elka.maszyna.entity.parser;
 
-import pl.edu.pw.elka.maszyna.entity.wezel.*;
+import pl.edu.pw.elka.maszyna.entity.parser.*;
 
 import java.util.HashMap;
 
+/**
+ * Drzewo wykonujące parsowanie
+ * @author Bogdan Szkoła
+ */
 public class DrzewoParsowania
 {
     public enum LogicznyByt {ZMIENNA, PREDYKAT, SUMA, PRZECIECIE, IMPLIKACJA, ROWNOWAZNOSC};
@@ -140,7 +144,4 @@ public class DrzewoParsowania
     {
         return Character.isWhitespace(symbol);
     }
-
-    
-    
 }

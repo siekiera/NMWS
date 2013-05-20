@@ -1,4 +1,4 @@
-package pl.edu.pw.elka.maszyna.entity;
+package pl.edu.pw.elka.maszyna.entity.algorytm;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Klauzula 
 {
-	public List<Predykat> predykaty;
+	public List<Literal> literaly;
 }
 
 

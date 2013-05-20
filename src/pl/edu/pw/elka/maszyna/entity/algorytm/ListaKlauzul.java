@@ -1,4 +1,4 @@
-package pl.edu.pw.elka.maszyna.entity;
+package pl.edu.pw.elka.maszyna.entity.algorytm;
 
 import java.util.List;
 

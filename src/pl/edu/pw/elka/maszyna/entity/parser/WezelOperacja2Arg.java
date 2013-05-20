@@ -1,4 +1,4 @@
-package pl.edu.pw.elka.maszyna.entity.wezel;
+package pl.edu.pw.elka.maszyna.entity.parser;
 
 /**
  * Created with IntelliJ IDEA.

@@ -10,7 +10,7 @@ import pl.edu.pw.elka.maszyna.widok.ZdarzenieWidoku;
 
 /**
  * Kontroler - MVC
- * @author siekiera
+ * @author Michał Toporowski
  */
 public class Kontroler
 {
