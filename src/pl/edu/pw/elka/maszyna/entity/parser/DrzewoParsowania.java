@@ -70,7 +70,6 @@ public class DrzewoParsowania
         		return budujDrzewo(napis.substring(1, napis.length() - 1));
         	}
             WezelPredykat wezelPredykat = new WezelPredykat(napis);
-            System.out.println("Nie ma operatorow: " + napis);
             return wezelPredykat;
         }
         else {
@@ -80,7 +79,6 @@ public class DrzewoParsowania
             {
                 WezelOperacja1Arg wezel = new WezelOperacja1Arg(dzialanie,
                        budujDrzewo(napis.substring(index + 1)));
-                System.out.println(index + ": " + napis.charAt(index));
                 return wezel;
             }
             else
@@ -88,7 +86,6 @@ public class DrzewoParsowania
                 WezelOperacja2Arg wezel = new WezelOperacja2Arg(dzialanie,
                         budujDrzewo(napis.substring(0, index)),
                         budujDrzewo(napis.substring(index + 1)));
-                System.out.println(index + ": " + napis.charAt(index));
                 return wezel;
             }
 
