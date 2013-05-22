@@ -24,4 +24,13 @@ public class Literal
     {
         return zanegowany;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (obj == null) return false;
+    	if (obj == this) return true;
+    	Literal l = (Literal)obj;
+    	if (l.zanegowany == this.zanegowany && l.predykat.equals(this.predykat)) return true;
+    	else return false;
+    }
 }

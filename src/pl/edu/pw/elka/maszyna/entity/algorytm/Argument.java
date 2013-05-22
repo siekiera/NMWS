@@ -18,4 +18,12 @@ class Argument
 	{
 		return Character.isLowerCase(nazwa.charAt(0));
 	}
+	
+	@Override
+	public boolean equals(Object arg0) {
+		if (arg0 == null) return false;
+		if (this == arg0) return true;
+		else if (!(arg0 instanceof Argument)) return false;
+		else return this.nazwa.equals(((Argument)arg0).nazwa);
+	}
 }
