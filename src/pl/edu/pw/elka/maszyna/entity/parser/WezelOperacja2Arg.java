@@ -9,8 +9,8 @@ package pl.edu.pw.elka.maszyna.entity.parser;
  */
 public class WezelOperacja2Arg extends WezelOperacja
 {
-    private final Wezel lewy;
-    private final Wezel prawy;
+    private Wezel lewy;
+    private Wezel prawy;
 
     public WezelOperacja2Arg(Dzialanie dzialanie, Wezel lewy, Wezel prawy)
     {
@@ -28,10 +28,20 @@ public class WezelOperacja2Arg extends WezelOperacja
     {
         return prawy;
     }
-    
+
+    public void setLewy(Wezel lewy)
+    {
+        this.lewy = lewy;
+    }
+
+    public void setPrawy(Wezel prawy)
+    {
+        this.prawy = prawy;
+    }
+
     @Override
     public String toString() {
-    	return lewy.toString() + dzialanie.getZnak() + prawy.toString();
+    	return "(" + lewy.toString() + dzialanie.getZnak() + prawy.toString() + ")";
     }
     
 }

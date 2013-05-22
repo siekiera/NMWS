@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class DrzewoParsowania
 {
-    public enum LogicznyByt {ZMIENNA, PREDYKAT, SUMA, PRZECIECIE, IMPLIKACJA, ROWNOWAZNOSC};
+    private enum LogicznyByt {ZMIENNA, PREDYKAT, SUMA, PRZECIECIE, IMPLIKACJA, ROWNOWAZNOSC};
 
     private static HashMap<Character, Integer> priorytety = new HashMap<Character, Integer>();
     private static HashMap<Character, Dzialanie> dzialania = new HashMap<Character, Dzialanie>();
@@ -47,6 +47,12 @@ public class DrzewoParsowania
 	{
 		this.parsuj(napis);
 	}
+
+
+    public Wezel getKorzenDrzewa()
+    {
+        return korzenDrzewa;
+    }
 	
 	/**
 	 * Parsuje wyrażenie w postaci napisu do drzewa

@@ -6,11 +6,16 @@ package pl.edu.pw.elka.maszyna.entity.parser;
  */
 public abstract class WezelOperacja extends Wezel
 {
-    protected final Dzialanie dzialanie;
+    protected Dzialanie dzialanie;
 
-    Dzialanie getDzialanie()
+    public Dzialanie getDzialanie()
     {
         return dzialanie;
+    }
+
+    public void setDzialanie(Dzialanie dzialanie)
+    {
+        this.dzialanie = dzialanie;
     }
 
     protected WezelOperacja(Dzialanie dzialanie)
