@@ -1,7 +1,5 @@
 package pl.edu.pw.elka.maszyna.entity.parser;
 
-import pl.edu.pw.elka.maszyna.entity.parser.*;
-
 import java.util.HashMap;
 
 /**
@@ -83,8 +81,7 @@ public class DrzewoParsowania
 
             if(dzialanie == Dzialanie.NIE)
             {
-                WezelOperacja1Arg wezel = new WezelOperacja1Arg(dzialanie,
-                       budujDrzewo(napis.substring(index + 1)));
+                WezelNegacja wezel = new WezelNegacja(budujDrzewo(napis.substring(index + 1)));
                 return wezel;
             }
             else

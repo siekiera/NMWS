@@ -4,13 +4,13 @@ package pl.edu.pw.elka.maszyna.entity.parser;
 /**
  *
  */
-public class WezelOperacja1Arg extends WezelOperacja
+public class WezelNegacja extends WezelOperacja
 {
     private Wezel dziecko;
 
-    public WezelOperacja1Arg(Dzialanie dzialanie, Wezel dziecko)
+    public WezelNegacja(Wezel dziecko)
     {
-        super(dzialanie);
+        super(Dzialanie.NIE);
         this.dziecko = dziecko;
     }
 
