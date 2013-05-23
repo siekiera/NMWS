@@ -2,6 +2,7 @@ package pl.edu.pw.elka.maszyna.entity.algorytm;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Klauzula - alternatywa litera≈Ç√≥w (predykat√≥w lub zapreczonych pred.)
@@ -13,27 +14,49 @@ public class Klauzula
 	
 	
 	
+	public Klauzula(Set<Literal> literaly) {
+		super();
+		this.literaly = literaly;
+	}
+
+
 	/**
 	 * Sprawdza czy na dwoch klauzulach mozna przeprowadzic rezolucje.
+	 * Jesli mozna to zwraca jej wynik.
 	 * @param inna
 	 * @return
 	 */
-	public boolean sprawdzRezolucjowalnosc(Klauzula inna){
+	public Klauzula sprawdzRezolucjowalnosc(Klauzula inna){
 		
 		Iterator gorna = literaly.iterator();
 		Iterator dolna = inna.literaly.iterator();
 		
+		Set<Literal> powstalaKlauzula = new TreeSet<>();
+		boolean tworzymyRezolucje = false;
+		
+		
 		while(gorna.hasNext()){
 			Literal literalGornej = (Literal)gorna.next();
+			powstalaKlauzula.add(literalGornej);
 			while(dolna.hasNext()){
-				if(dolna.next().equals(literalGornej)) return true;
+				Literal literalDolnej = (Literal) dolna.next();
+				powstalaKlauzula.add(literalDolnej);
+				if(literalDolnej.jestZaprzeczeniem(literalGornej)){
+					if(tworzymyRezolucje == true){
+						System.out.println("WiÍcej niø jedna rezolucja. Z≥e dane. Powstala klauzula by≥aby TRUE");
+					}
+					powstalaKlauzula.remove(literalDolnej);
+					powstalaKlauzula.remove(literalGornej);
+					tworzymyRezolucje = true;
+				}
+				
 			}
 			dolna = inna.literaly.iterator();
 		}
 		
-		return false;
+		if(tworzymyRezolucje) return new Klauzula(powstalaKlauzula);
+		else return null;
 	}
-	
 }
 
 
