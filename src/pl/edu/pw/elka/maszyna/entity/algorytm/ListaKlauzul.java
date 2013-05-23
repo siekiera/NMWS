@@ -1,15 +1,15 @@
 package pl.edu.pw.elka.maszyna.entity.algorytm;
 
-import java.util.Set;
+import java.util.List;
 
 public class ListaKlauzul {
-	private Set<Klauzula> klauzule;
+	private List<Klauzula> klauzule;
 
-	public Set<Klauzula> getKlauzule() {
+	public List<Klauzula> getKlauzule() {
 		return klauzule;
 	}
 
-	public void setKlauzule(Set<Klauzula> klauzule) {
+	public void setKlauzule(List<Klauzula> klauzule) {
 		this.klauzule = klauzule;
 	}
 	

@@ -20,11 +20,13 @@ public class ModulWnioskowania
 	 * @param listaKlauzul
 	 * @return wynik wnioskowania
 	 * Funkcja swoim działaniem generuje nowe Klauzule
-	 * i umieszcza je w {@code listaKlauzul}. 
+	 * i umieszcza je w {@code listaKlauzul}. {@code listaKlauzul} zawiera klauzule, 
+	 * w ktorych predykaty maja argumenty bedace stalymi.
 	 */
 	public boolean wnioskuj(ListaKlauzul listaKlauzul){
 		//TODO algorytm - do zaimplementowania
         //TODO być może tę listę klauzul będzie lepiej dać w konstruktorze - jak chcesz
+		//int liczbaPoczatkowychKlauzul = listaKlauzul.getKlauzule().size();
 		return false;
 	}
 
