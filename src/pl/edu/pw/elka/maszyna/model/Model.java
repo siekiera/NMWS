@@ -6,6 +6,7 @@ import java.util.List;
 import pl.edu.pw.elka.maszyna.entity.algorytm.ListaKlauzul;
 import pl.edu.pw.elka.maszyna.entity.parser.DrzewoParsowania;
 import pl.edu.pw.elka.maszyna.entity.algorytm.Klauzula;
+import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaDanych;
 import sun.security.krb5.internal.KrbErrException;
 
 /**
@@ -23,8 +24,9 @@ public class Model
 	/**
 	 * Funkcja, która ze zdań w postaci stringów wywnioskuje o co chodzi
 	 * @param tekstWejsciowy
+	 * @throws WyjatekParsowaniaDanych 
 	 */
-	public void rob(final String tekstWejsciowy)
+	public void rob(final String tekstWejsciowy) throws WyjatekParsowaniaDanych
 	{
 		//to powinno podzielić tekst na linie
 		String zdania[] = tekstWejsciowy.split("\\r?\\n");
