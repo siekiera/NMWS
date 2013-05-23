@@ -33,7 +33,19 @@ public class Klauzula
 		
 		return false;
 	}
-	
+
+    public Klauzula(Set<Literal> literaly)
+    {
+        this.literaly = literaly;
+    }
+
+    /**
+     * Suma logiczna 2 klauzul
+     * @param k2
+     */
+    public void dodaj(Klauzula k2) {
+        literaly.addAll(k2.literaly);
+    }
 }
 
 

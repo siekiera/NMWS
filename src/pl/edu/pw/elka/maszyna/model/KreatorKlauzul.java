@@ -1,9 +1,15 @@
 package pl.edu.pw.elka.maszyna.model;
 
+import pl.edu.pw.elka.maszyna.entity.algorytm.Klauzula;
 import pl.edu.pw.elka.maszyna.entity.algorytm.ListaKlauzul;
+import pl.edu.pw.elka.maszyna.entity.algorytm.Literal;
+import pl.edu.pw.elka.maszyna.entity.algorytm.Predykat;
 import pl.edu.pw.elka.maszyna.entity.parser.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *  Moduł przerabiający drzewa na listę klauzul
@@ -24,7 +30,8 @@ public class KreatorKlauzul
     */
     public ListaKlauzul drzewaNaKlauzule(final List<DrzewoParsowania> las)
     {
-        //TODO zrobić
+        ListaKlauzul listaKlauzul = new ListaKlauzul();
+
         for(DrzewoParsowania drzewo : las) {
             Wezel korzen = drzewo.getKorzenDrzewa();
             korzen = likwidujRownowaznosc(korzen);
@@ -36,8 +43,10 @@ public class KreatorKlauzul
             korzen = naKoniunkcjeAlternatyw(korzen);
             System.out.println("Na koniunkcję alternatyw: " + korzen);
 
+            listaKlauzul.klauzule.addAll(drzewoNaKlauzule(korzen));
+            //System.out.println(listaKlauzul.toString());
         }
-        return null;
+        return listaKlauzul;
     }
 
     /**
@@ -234,7 +243,77 @@ public class KreatorKlauzul
         return new WezelOperacja2Arg(Dzialanie.I, alt1, alt2);
     }
 
+    /**
+     * Przerabia drzewo w postaci koniunkcji alternatyw na klauzulę(-e)
+     * @param wezel
+     * @return
+     */
+    private List<Klauzula> drzewoNaKlauzule(Wezel wezel) {
 
+        if(wezel.getClass() == WezelOperacja2Arg.class) {
+            WezelOperacja2Arg operacja = (WezelOperacja2Arg)wezel;
+
+            //koniunkcja -> lista klauzul (rozdzielenie)
+            if(operacja.getDzialanie() == Dzialanie.I) {
+                List<Klauzula> lista1 = drzewoNaKlauzule(operacja.getLewy());
+                List<Klauzula> lista2 = drzewoNaKlauzule(operacja.getPrawy());
+                lista1.addAll(lista2);
+                return lista1;
+            }
+        }
+
+        //alternatywa lub terminalny
+        List<Klauzula> lista = new ArrayList<Klauzula>();
+        lista.add(alternatywyNaKlauzule(wezel));
+        return lista;
+    }
+
+    /**
+     *
+     * @param wezel
+     * @return
+     */
+    private Klauzula alternatywyNaKlauzule(Wezel wezel) {
+        if(wezel.getClass() == WezelOperacja2Arg.class)
+        {
+            //alternatywa
+            WezelOperacja2Arg alternatywa = (WezelOperacja2Arg)wezel;
+            if(alternatywa.getDzialanie() != Dzialanie.LUB) throw new RuntimeException("Bład");
+
+            Klauzula k1 = alternatywyNaKlauzule(alternatywa.getLewy());
+            Klauzula k2 = alternatywyNaKlauzule(alternatywa.getPrawy());
+            k1.dodaj(k2);
+            return k1;
+        } else { //węzeł terminalny
+            Set<Literal> literalSet = new HashSet<Literal>();
+            literalSet.add(wezelKoncowyNaLiteral(wezel));
+            return new Klauzula(literalSet);
+        }
+    }
+
+    /**
+     * @param wezel - WezelNegacja, bądź WezelPredykat
+     * @return
+     */
+    private Literal wezelKoncowyNaLiteral(Wezel wezel) {
+        WezelPredykat wezelPredykat;
+        boolean zaprzeczony;
+        if(wezel.getClass() == WezelNegacja.class) {
+            wezelPredykat = (WezelPredykat)((WezelNegacja)wezel).getDziecko();
+            zaprzeczony = true;
+        } else {
+            wezelPredykat = (WezelPredykat)wezel;
+            zaprzeczony = false;
+        }
+
+        return new Literal(Predykat.parsuj(wezelPredykat.getPredykat()), zaprzeczony);
+    }
+
+    /**
+     * Neguje węzeł
+     * @param wezel
+     * @return
+     */
     private Wezel neguj(final Wezel wezel) {
         if(wezel.getClass() == WezelNegacja.class) return ((WezelNegacja)wezel).getDziecko();
         else return new WezelNegacja(wezel);

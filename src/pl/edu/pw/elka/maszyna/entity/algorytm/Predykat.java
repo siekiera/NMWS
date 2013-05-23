@@ -1,5 +1,6 @@
 package pl.edu.pw.elka.maszyna.entity.algorytm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,16 @@ public class Predykat
 		this.nazwa = nazwa;
 		this.argumenty = argumenty;
 	}
+
+    /**
+     * "Factory method" - ma sparsować napis i wyprodukować predykat
+     * @param napis
+     * @return
+     */
+    public static Predykat parsuj(String napis) {
+        //TODO trzeba wyodrębnić argumenty - na razie wrzyca wszystko do nazwy
+        return new Predykat(napis, new ArrayList<Argument>());
+    }
 	
 	@Override
 	public boolean equals(Object obj) {
