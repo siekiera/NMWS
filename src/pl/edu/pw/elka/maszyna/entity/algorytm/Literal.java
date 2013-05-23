@@ -33,4 +33,11 @@ public class Literal
     	if (l.zanegowany == this.zanegowany && l.predykat.equals(this.predykat)) return true;
     	else return false;
     }
+    
+    public boolean jestZaprzeczeniem(Literal innego){
+    	
+    	if(this.getPredykat().equals(innego.getPredykat()) && this.zanegowany == innego.isZanegowany()) return false;
+    	else return true;
+    	
+    }
 }
