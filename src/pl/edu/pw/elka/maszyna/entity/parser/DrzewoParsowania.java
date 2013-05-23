@@ -2,24 +2,19 @@ package pl.edu.pw.elka.maszyna.entity.parser;
 
 import java.util.HashMap;
 
+import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaDanych;
+
 /**
  * Drzewo wykonujące parsowanie
  * @author Bogdan Szkoła
  */
 public class DrzewoParsowania
 {
-    private enum LogicznyByt {ZMIENNA, PREDYKAT, SUMA, PRZECIECIE, IMPLIKACJA, ROWNOWAZNOSC};
-
     private static HashMap<Character, Integer> priorytety = new HashMap<Character, Integer>();
     private static HashMap<Character, Dzialanie> dzialania = new HashMap<Character, Dzialanie>();
 
-    //	private Operacja nieistniajacaOperacja = new Operacja(null);
-    //private Wezel aktualnyWezel;
     private Wezel korzenDrzewa = null;
 
-
-
-	//private Wezel korzen;
     static
     {
         priorytety.put('-', 1);
@@ -40,8 +35,9 @@ public class DrzewoParsowania
 	/**
 	 * Tworzy nowe drzewo, sparsowawszy wyrażenie w postaci napisu
 	 * @param napis
+	 * @throws WyjatekParsowaniaDanych 
 	 */
-	public DrzewoParsowania(String napis)
+	public DrzewoParsowania(String napis) throws WyjatekParsowaniaDanych
 	{
 		this.parsuj(napis);
 	}
@@ -55,8 +51,9 @@ public class DrzewoParsowania
 	/**
 	 * Parsuje wyrażenie w postaci napisu do drzewa
 	 * @param napis
+	 * @throws WyjatekParsowaniaDanych 
 	 */
-	private void parsuj(String napis)
+	private void parsuj(String napis) throws WyjatekParsowaniaDanych
 	{
         napis = pominBialeZnaki(napis);
 
@@ -64,12 +61,15 @@ public class DrzewoParsowania
         System.out.println(korzenDrzewa.toString());
     }
 
-    private Wezel budujDrzewo(final String napis) {
+    private Wezel budujDrzewo(final String napis) throws WyjatekParsowaniaDanych {
 
         int index = szukajNajwyzszyPriorytet(napis);
+        // jesli nie znaleziono zadnego operatora, nie zagniezdzonego w nawiasy
         if(index == -1)
         {
-        	if(napis.length() > 0 && napis.charAt(0) == '(')
+        	if(napis.length() == 0) throw new WyjatekParsowaniaDanych("Niezgodność argumentów operacji");
+        	if(napis.charAt(napis.length() - 1) != ')') throw new WyjatekParsowaniaDanych("Brakuje nawiasu");
+        	else if(napis.charAt(0) == '(')
         	{
         		return budujDrzewo(napis.substring(1, napis.length() - 1));
         	}
