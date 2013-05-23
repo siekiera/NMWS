@@ -6,7 +6,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import pl.edu.pw.elka.maszyna.model.Model;
 import pl.edu.pw.elka.maszyna.widok.Widok;
 import pl.edu.pw.elka.maszyna.widok.ZdarzenieWidoku;
-import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaDanych;
+import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaNiepoprawnychDanych;
 
 
 /**
@@ -51,7 +51,7 @@ public class Kontroler
 			} catch (InterruptedException e)
 			{
 				e.printStackTrace();
-			} catch (WyjatekParsowaniaDanych e) {
+			} catch (WyjatekParsowaniaNiepoprawnychDanych e) {
 				widok.pokazKomunikatOBledzieWParsowaniu(e.getKomunikat());
 			}
 			

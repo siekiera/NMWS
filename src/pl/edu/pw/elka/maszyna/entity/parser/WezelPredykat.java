@@ -1,6 +1,6 @@
 package pl.edu.pw.elka.maszyna.entity.parser;
 
-import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaDanych;
+import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaNiepoprawnychDanych;
 
 
 /**
@@ -11,22 +11,22 @@ public class WezelPredykat extends Wezel
     //public Predykat pred;
     private final String predykat;
 
-    public WezelPredykat(String predykat) throws WyjatekParsowaniaDanych
+    public WezelPredykat(String predykat) throws WyjatekParsowaniaNiepoprawnychDanych
     {
     	zatwierdzPoprawnoscPredykatu(predykat);
         this.predykat = predykat;
     }
 
-    private void zatwierdzPoprawnoscPredykatu(String predykat) throws WyjatekParsowaniaDanych {
+    private void zatwierdzPoprawnoscPredykatu(String predykat) throws WyjatekParsowaniaNiepoprawnychDanych {
     	
     	int indeksNawiasuOtwierajacago = predykat.indexOf('(');
     	if(indeksNawiasuOtwierajacago == -1) {
-    		throw new WyjatekParsowaniaDanych("Predykat \"" + predykat + "\" nie jest poprawny");
+    		throw new WyjatekParsowaniaNiepoprawnychDanych("Predykat \"" + predykat + "\" nie jest poprawny");
     	}
     	else {
     		for(int i = 0; i < indeksNawiasuOtwierajacago; i++) {
     			if(!Character.isUpperCase(predykat.charAt(i))) {
-    				throw new WyjatekParsowaniaDanych("Nazwa predykatu \"" + predykat + "\" zawiera małą literę albo niepoprawny znak");
+    				throw new WyjatekParsowaniaNiepoprawnychDanych("Nazwa predykatu \"" + predykat + "\" zawiera małą literę albo niepoprawny znak");
     			}
     		}
     		
@@ -35,7 +35,7 @@ public class WezelPredykat extends Wezel
 
 	}
 
-	private void zatwierdzPoprawnoscArgumentow(String argumentyPredykatu) throws WyjatekParsowaniaDanych {
+	private void zatwierdzPoprawnoscArgumentow(String argumentyPredykatu) throws WyjatekParsowaniaNiepoprawnychDanych {
 		if(argumentyPredykatu.length() == 0) {
 			return;
 		}
@@ -53,16 +53,16 @@ public class WezelPredykat extends Wezel
 		
 	}
 
-	private void zatwierdzPoprawnoscArgumentu(String argument) throws WyjatekParsowaniaDanych {
+	private void zatwierdzPoprawnoscArgumentu(String argument) throws WyjatekParsowaniaNiepoprawnychDanych {
 		if(argument.length() == 0) {
-			throw new WyjatekParsowaniaDanych("Opuszczono argument");
+			throw new WyjatekParsowaniaNiepoprawnychDanych("Opuszczono argument");
 		}
 		
 		boolean czyZmienna = sprawdzCzyZmienna(argument);
 		boolean czyStala = sprawdzCzyStala(argument);
 		
 		if(!czyZmienna && !czyStala) {
-			throw new WyjatekParsowaniaDanych("Argument \"" + argument + "\" nie jest poprawny");
+			throw new WyjatekParsowaniaNiepoprawnychDanych("Argument \"" + argument + "\" nie jest poprawny");
 		}
 	}
 
