@@ -1,6 +1,6 @@
 package pl.edu.pw.elka.maszyna.entity.algorytm;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Klauzula - alternatywa literałów (predykatów lub zapreczonych pred.)
@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Klauzula 
 {
-	public List<Literal> literaly;
+	public Set<Literal> literaly;
 }
 
 
