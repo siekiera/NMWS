@@ -87,14 +87,18 @@ public class WezelPredykat extends Wezel
 		return true;
 	}
 
-	String getPredykat()
+	public String getPredykat()
     {
         return predykat;
     }
     
     @Override
+    /**
+     * zwraca samą nazwę predykatu (bez nawiasów i argumentów)
+     * do pobrania pełnego predykatu w postaci stringa należy użyć getPredykat
+     */
     public String toString() {
-    	return predykat;
+    	return predykat.substring(0, predykat.indexOf('('));
     }
     
 }
