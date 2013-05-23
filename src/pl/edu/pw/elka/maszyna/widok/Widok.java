@@ -4,6 +4,7 @@ import java.util.concurrent.BlockingQueue;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  * Klasa widoku w MVC
@@ -18,8 +19,16 @@ public class Widok
 		this.okno = new OknoAplikacji(kolejkaZdarzen);
 	}
 
-	public void pokazKomunikatOBledzieWParsowaniu(String komunikat) {
-		JOptionPane.showMessageDialog(okno, komunikat, "Parser", JOptionPane.ERROR_MESSAGE);
+	public void pokazKomunikatOBledzieWParsowaniu(final String komunikat) {
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				JOptionPane.showMessageDialog(okno, komunikat, "Parser", JOptionPane.ERROR_MESSAGE);				
+			}
+		});
+		
 	}
 	
 	

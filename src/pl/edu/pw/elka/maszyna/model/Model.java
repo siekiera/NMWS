@@ -6,7 +6,8 @@ import java.util.List;
 import pl.edu.pw.elka.maszyna.entity.algorytm.ListaKlauzul;
 import pl.edu.pw.elka.maszyna.entity.parser.DrzewoParsowania;
 import pl.edu.pw.elka.maszyna.entity.algorytm.Klauzula;
-import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaDanych;
+import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaNiepoprawnychDanych;
+import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaPustejLinii;
 import sun.security.krb5.internal.KrbErrException;
 
 /**
@@ -24,9 +25,9 @@ public class Model
 	/**
 	 * Funkcja, która ze zdań w postaci stringów wywnioskuje o co chodzi
 	 * @param tekstWejsciowy
-	 * @throws WyjatekParsowaniaDanych 
+	 * @throws WyjatekParsowaniaNiepoprawnychDanych 
 	 */
-	public void rob(final String tekstWejsciowy) throws WyjatekParsowaniaDanych
+	public void rob(final String tekstWejsciowy) throws WyjatekParsowaniaNiepoprawnychDanych
 	{
 		//to powinno podzielić tekst na linie
 		String zdania[] = tekstWejsciowy.split("\\r?\\n");
@@ -36,7 +37,13 @@ public class Model
 		for(String zdanie : zdania)
 		{
 			//parsujemy
-			las.add(new DrzewoParsowania(zdanie));
+			if(zdanie.length() != 0) {
+				try {
+					las.add(new DrzewoParsowania(zdanie));
+				} catch (WyjatekParsowaniaPustejLinii e) {
+					//TODO mozna podac jakis komunikat (niekoniecznie)
+				}
+			}
 			//TODO jeśli nie uda się sparsować, to pewnie powinno rzucać jakimś wyjątkiem
 		}
 		

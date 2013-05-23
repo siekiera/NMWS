@@ -1,10 +1,10 @@
 package pl.edu.pw.elka.maszyna.wspolne.wyjatki;
 
-public class WyjatekParsowaniaDanych extends Exception {
+public class WyjatekParsowaniaNiepoprawnychDanych extends Exception {
 
 	private final String komunikat;
 
-	public WyjatekParsowaniaDanych(String komunikat) {
+	public WyjatekParsowaniaNiepoprawnychDanych(String komunikat) {
 		this.komunikat = komunikat;
 	}
 	
