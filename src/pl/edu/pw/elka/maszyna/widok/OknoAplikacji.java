@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.BlockingQueue;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 
 /**
@@ -23,8 +25,8 @@ class OknoAplikacji extends JFrame
 	
 	private final BlockingQueue<ZdarzenieWidoku> kolejkaZdarzen;
 	
-	
-	private JTextArea poleWprowadzania;
+	private JTextArea poleFaktow;
+	private JTextArea poleZadania;
 	private JButton przycisk;
 	
 	public OknoAplikacji(final BlockingQueue<ZdarzenieWidoku> kolejkaZdarzen)
@@ -45,7 +47,7 @@ class OknoAplikacji extends JFrame
 			public void actionPerformed(ActionEvent arg0)
 			{
 				//wyślij tekst do kontrolera (umieść nowe zdarzenie w kolejce)
-				String tekst = poleWprowadzania.getText();
+				String tekst = poleFaktow.getText();
 				try
 				{
 					kolejkaZdarzen.put(new ZdarzenieWidoku(tekst));
@@ -65,10 +67,18 @@ class OknoAplikacji extends JFrame
 		setSize(ROZMIAR);
 		setTitle("Najmądrzejsza maszyna wnioskująca świata");
 		
-		poleWprowadzania = new JTextArea();
-		przycisk = new JButton("Rób!!!");
+		poleFaktow = new JTextArea();
+		poleFaktow.setBorder(BorderFactory.createTitledBorder("Pole dla faktów:"));
+		poleZadania = new JTextArea();
+		poleZadania.setBorder(BorderFactory.createTitledBorder("Pole dla zadania:"));
+		przycisk = new JButton("Wywnioskuj!!!");
 		
-		add(poleWprowadzania, BorderLayout.CENTER);
+        JSplitPane panelPol = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
+                poleFaktow,
+                poleZadania);
+        panelPol.setResizeWeight(0.95);
+        
+		add(panelPol, BorderLayout.CENTER);
 		add(przycisk, BorderLayout.SOUTH);
 		setVisible(true);
 	}
