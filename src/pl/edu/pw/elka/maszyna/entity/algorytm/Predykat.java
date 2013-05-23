@@ -10,8 +10,8 @@ public class Predykat
 {
 	/** nazwa predykatu - drukowanymi literami*/
 	private final String nazwa;
-	private final List<Argument> argumenty;
-	public Predykat(String nazwa, List<Argument> argumenty)
+	private final Argument[] argumenty;
+	public Predykat(String nazwa, Argument[] argumenty)
 	{
 		super();
 		this.nazwa = nazwa;
@@ -24,8 +24,19 @@ public class Predykat
      * @return
      */
     public static Predykat parsuj(String napis) {
-        //TODO trzeba wyodrębnić argumenty - na razie wrzyca wszystko do nazwy
-        return new Predykat(napis, new ArrayList<Argument>());
+        int poczNawiasu = napis.indexOf('(');
+        String nazwa = napis.substring(0, poczNawiasu);
+        String argumentStr = napis.substring(poczNawiasu + 1, napis.length() - 1);
+
+        String[] argSplit = argumentStr.split(",");
+
+        Argument[] argumenty = new Argument[argSplit.length];
+
+        for(int i = 0; i < argSplit.length; i++) {
+            argumenty[i] = new Argument(argSplit[i]);
+        }
+
+        return new Predykat(nazwa, argumenty);
     }
 	
 	@Override
@@ -37,12 +48,12 @@ public class Predykat
 		else if(!o.nazwa.equals(this.nazwa)) return false;
 		
 		int i, j;
-		i = o.argumenty.size();
-		j = this.argumenty.size();
+		i = o.argumenty.length;
+		j = this.argumenty.length;
 		if(i != j) return false;
 		
 		for(int a = 0; a<i; a++){
-			if(!o.argumenty.get(a).equals(this.argumenty.get(a))) return false;
+			if(!o.argumenty[a].equals(this.argumenty[a])) return false;
 		}
 
 		return true;

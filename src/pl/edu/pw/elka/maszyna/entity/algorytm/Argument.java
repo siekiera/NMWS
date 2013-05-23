@@ -10,7 +10,12 @@ class Argument
 	/** nazwa */
 	public String nazwa;
 
-	/**
+    Argument(String nazwa)
+    {
+        this.nazwa = nazwa;
+    }
+
+    /**
 	 * @return true - jeśli argument jest zmienną (nazwa zaczyna się małą literą)<br>
 	 * false, jeśli argument jest stałą/obiektem (nazwa zaczyna się wielką literą)
 	 */
