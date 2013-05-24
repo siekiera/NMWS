@@ -41,10 +41,10 @@ public class KreatorKlauzul
             korzen = ograniczNegacje(korzen);
             System.out.println("Ograniczenie negacji: " + korzen);
             korzen = naKoniunkcjeAlternatyw(korzen);
-            System.out.println("Na koniunkcję alternatyw: " + korzen);
+            System.out.println("Na koniunkcję alternatyw: " + korzen + "\n");
 
             listaKlauzul.klauzule.addAll(drzewoNaKlauzule(korzen));
-            //System.out.println(listaKlauzul.toString());
+            System.out.println("Lista klauzul:\n" + listaKlauzul.toString());
         }
         return listaKlauzul;
     }

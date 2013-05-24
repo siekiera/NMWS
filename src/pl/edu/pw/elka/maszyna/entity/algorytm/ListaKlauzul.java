@@ -10,4 +10,15 @@ public class ListaKlauzul {
     {
         klauzule = new ArrayList<Klauzula>();
     }
+    
+    @Override
+    public String toString() {
+    	String wynik = "";
+    	for (Klauzula klauzula : klauzule) {
+    		wynik += klauzula.toString() + "\n";
+    	}
+    	return wynik;
+//    	return super.toString();
+    }
+    
 }

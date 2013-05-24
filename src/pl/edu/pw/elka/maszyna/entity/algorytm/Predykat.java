@@ -58,5 +58,20 @@ public class Predykat
 
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		String wynik = nazwa + "(";
+		for(int i = 0; i < argumenty.length; i++) {
+			wynik += argumenty[i].toString();
+
+			if(i != argumenty.length - 1) {
+				wynik += ",";
+			}
+		}
+		wynik += ")";
+		return wynik;
+	}
+	
 }
 

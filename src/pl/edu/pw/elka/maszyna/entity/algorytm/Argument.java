@@ -31,4 +31,10 @@ class Argument
 		else if (!(arg0 instanceof Argument)) return false;
 		else return this.nazwa.equals(((Argument)arg0).nazwa);
 	}
+	
+	@Override
+	public String toString() {
+		return nazwa;
+	}
+	
 }

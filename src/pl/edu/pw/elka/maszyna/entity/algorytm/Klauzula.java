@@ -64,6 +64,21 @@ public class Klauzula
     public void dodaj(Klauzula k2) {
         literaly.addAll(k2.literaly);
     }
+    
+    @Override
+    public String toString() {
+    	String wynik = "";
+    	int licznikPetli = 0;
+    	for(Literal literal : literaly) {
+    		if(licznikPetli != 0) {
+    			wynik += "|";
+    		}
+    		wynik += literal.toString();
+    		licznikPetli++;
+    	}
+    	return wynik;
+    }
+    
 }
 
 

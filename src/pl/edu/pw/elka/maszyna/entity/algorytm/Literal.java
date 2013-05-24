@@ -40,4 +40,15 @@ public class Literal
     	else return true;
     	
     }
+    
+    @Override
+    public String toString() {
+    	String wynik = "";
+    	if(zanegowany) {
+    		wynik += "-";
+    	}
+    	wynik += predykat.toString(); 
+    	return wynik;
+    }
+    
 }
