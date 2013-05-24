@@ -133,15 +133,15 @@ public class KreatorKlauzul
             else {
                 WezelOperacja2Arg operacja = (WezelOperacja2Arg)dziecko;
 
-                operacja.setLewy(ograniczNegacje(operacja.getLewy()));
-                operacja.setPrawy(ograniczNegacje(operacja.getPrawy()));
+                Wezel nowyLewy = ograniczNegacje(neguj(operacja.getLewy()));
+                Wezel nowyPrawy = ograniczNegacje(neguj(operacja.getPrawy()));
 
                 switch (operacja.getDzialanie())
                 {
                     case I: //koniunkcja -> zanegowane alternatywy
-                        return new WezelOperacja2Arg(Dzialanie.LUB, neguj(operacja.getLewy()), neguj(operacja.getPrawy()));
+                        return new WezelOperacja2Arg(Dzialanie.LUB, nowyLewy, nowyPrawy);
                     case LUB: //alternatywa -> zanegowane koniunkcje
-                        return new WezelOperacja2Arg(Dzialanie.I, neguj(operacja.getLewy()), neguj(operacja.getPrawy()));
+                        return new WezelOperacja2Arg(Dzialanie.I, nowyLewy, nowyPrawy);
                     default:
                         throw new RuntimeException("Błąd - tu już nie powinno być innych działań");
                 }
