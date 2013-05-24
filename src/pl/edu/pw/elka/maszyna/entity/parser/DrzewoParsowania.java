@@ -105,14 +105,14 @@ public class DrzewoParsowania
         int indexOperatoraONajwyzszymPriorytecie = -1;
         int najwyzszyPriorytet = 0;
         int poziomNawiasow = 0;
-        for(int i = 0; i < napis.length(); i++)
+        for(int i = napis.length() - 1; i >= 0; i--)
         {
             char symbol = napis.charAt(i);
-            if(symbol == '(')
+            if(symbol == ')')
             {
                 poziomNawiasow++;
             }
-            else if(symbol == ')')
+            else if(symbol == '(')
             {
                 poziomNawiasow--;
             }

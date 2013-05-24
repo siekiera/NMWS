@@ -25,7 +25,7 @@ public class Klauzula
 		Iterator gorna = literaly.iterator();
 		Iterator dolna = inna.literaly.iterator();
 		
-		Set<Literal> powstalaKlauzula = new TreeSet<>();
+		Set<Literal> powstalaKlauzula = new TreeSet<Literal>();
 		boolean tworzymyRezolucje = false;
 		
 		
