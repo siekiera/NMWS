@@ -48,7 +48,19 @@ public class Klauzula
 			dolna = inna.literaly.iterator();
 		}
 		
-		if(tworzymyRezolucje) return new Klauzula(powstalaKlauzula);
+		if(tworzymyRezolucje){ 
+			//TODO trzeba sprawdzic czy klauzula != TRUE
+			Iterator zewnetrzny = powstalaKlauzula.iterator();
+			Iterator wewnetrzny = powstalaKlauzula.iterator();
+			while(zewnetrzny.hasNext()){
+				while(wewnetrzny.hasNext()){
+					if( ( (Literal)wewnetrzny.next()).jestZaprzeczeniem(((Literal)zewnetrzny.next() ) )) return null;
+				}
+				wewnetrzny = powstalaKlauzula.iterator();
+			}
+			
+			return new Klauzula(powstalaKlauzula);
+		}
 		else return null;
 	}
 
