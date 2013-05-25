@@ -50,5 +50,13 @@ public class Literal
     	wynik += predykat.toString(); 
     	return wynik;
     }
+
+	public boolean rezolucjowalny(Literal innyLiteral) {
+		
+		if (this.zanegowany == innyLiteral.zanegowany) {
+			return false;
+		}
+		return this.predykat.rezolucjowalny(innyLiteral.predykat);
+	}
     
 }

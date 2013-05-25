@@ -37,4 +37,22 @@ class Argument
 		return nazwa;
 	}
 	
+	public boolean czyStala() {
+		if(!Character.isUpperCase(nazwa.charAt(0))) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	public boolean czyZmienna() {
+		for(int i = 0; i < nazwa.length(); i++) {
+			if(!Character.isLowerCase(nazwa.charAt(i))) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 }

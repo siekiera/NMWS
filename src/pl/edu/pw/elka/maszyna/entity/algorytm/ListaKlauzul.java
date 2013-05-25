@@ -11,6 +11,10 @@ public class ListaKlauzul {
         klauzule = new ArrayList<Klauzula>();
     }
     
+    public List<Klauzula> getKlauzule() {
+		return klauzule;
+	}
+    
     @Override
     public String toString() {
     	String wynik = "";

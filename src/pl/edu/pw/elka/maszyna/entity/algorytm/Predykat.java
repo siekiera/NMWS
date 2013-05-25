@@ -30,13 +30,18 @@ public class Predykat
 
         String[] argSplit = argumentStr.split(",");
 
-        Argument[] argumenty = new Argument[argSplit.length];
-
-        for(int i = 0; i < argSplit.length; i++) {
-            argumenty[i] = new Argument(argSplit[i]);
+        if (argSplit[0].equals("")) {
+        	return new Predykat(nazwa, new Argument[0]);
         }
-
-        return new Predykat(nazwa, argumenty);
+        else {
+		    Argument[] argumenty = new Argument[argSplit.length];
+		
+		    for(int i = 0; i < argSplit.length; i++) {
+		        argumenty[i] = new Argument(argSplit[i]);
+		    }
+		
+		    return new Predykat(nazwa, argumenty);
+        }
     }
 	
 	@Override
@@ -71,6 +76,30 @@ public class Predykat
 		}
 		wynik += ")";
 		return wynik;
+	}
+
+	public boolean rezolucjowalny(Predykat innyPredykat) {
+		
+		if (!this.nazwa.equals(innyPredykat.nazwa)) {
+			return false;
+		}
+		
+		if (this.argumenty.length != innyPredykat.argumenty.length) {
+			return false;
+		}
+		
+		if (this.argumenty.length == 0) {
+			return true;
+		}
+		
+		for (int i = 0; i < this.argumenty.length; i++) {
+			if (this.argumenty[i].czyStala() && innyPredykat.argumenty[i].czyStala()) {
+				if (!this.argumenty[i].equals(innyPredykat.argumenty[i])) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 }
