@@ -1,6 +1,7 @@
 package pl.edu.pw.elka.maszyna.entity.algorytm;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -78,6 +79,11 @@ public class Predykat
 		return wynik;
 	}
 
+	/**
+	 * Sprawdza czy da sie przeprowadzic rezolucje
+	 * @param innyPredykat
+	 * @return
+	 */
 	public boolean rezolucjowalny(Predykat innyPredykat) {
 		
 		if (!this.nazwa.equals(innyPredykat.nazwa)) {
@@ -100,6 +106,30 @@ public class Predykat
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Tworzy liste unifikacji
+	 * @param innyPredykat
+	 * @return
+	 */
+	public ListaUnifikacji stworzListeUnifikacji(Predykat innyPredykat) {
+		List<Unifikacja> listaUnifikacji = new ArrayList<Unifikacja>();
+		for (int i = 0; i < this.argumenty.length; i++) {
+			// jesli nazwy argumentow sa rozne - zachodzi unifikacja
+			if (!this.argumenty[i].nazwa.equals(innyPredykat.argumenty[i].nazwa)) {
+				listaUnifikacji.add(new Unifikacja(this.argumenty[i].nazwa, innyPredykat.argumenty[i].nazwa));
+			}
+		}
+		return new ListaUnifikacji(listaUnifikacji);
+	}
+
+	public void przeprowadzUnifikacje(ListaUnifikacji listaUnifikacji) {
+		for (int i = 0; i < this.argumenty.length; i++) {
+			for (Unifikacja unifikacja : listaUnifikacji.getListaUnifikacji()) {
+				
+			}
+		}
 	}
 	
 }

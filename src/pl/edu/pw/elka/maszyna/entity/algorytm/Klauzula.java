@@ -1,8 +1,13 @@
 package pl.edu.pw.elka.maszyna.entity.algorytm;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekRezolucji;
 
 /**
  * Klauzula - alternatywa literałów (predykatów lub zapreczonych pred.)
@@ -12,7 +17,9 @@ public class Klauzula
 {
 	public Set<Literal> literaly;
 	
-	
+	public Klauzula(Klauzula klauzula) {
+		literaly = new HashSet<Literal>(klauzula.literaly);
+	}
 	
 	/**
 	 * Sprawdza czy na dwoch klauzulach mozna przeprowadzic rezolucje.
@@ -90,6 +97,57 @@ public class Klauzula
     	}
     	return wynik;
     }
+
+    /**
+     * Operacja przeprowadzenia rezolucji
+     * @param innaKlauzula
+     * @return
+     */
+	public Klauzula przeprowadzRezolucje(Klauzula innaKlauzula) {
+		
+		Klauzula gornaKlauzula = new Klauzula(innaKlauzula);
+		Klauzula dolnaKlauzula = new Klauzula(this);
+		
+		boolean rezolucjowalny = true;
+		while (rezolucjowalny) {
+			rezolucjowalny = false;
+			try {
+				for (Literal literalZGornejKlauzuli : gornaKlauzula.literaly) {
+		    		for (Literal literalZDolnejKlauzuli : dolnaKlauzula.literaly) {
+		    			if (literalZGornejKlauzuli.rezolucjowalny(literalZDolnejKlauzuli)) {
+		    				//tworzymy liste unifikacji
+		    				ListaUnifikacji listaUnifikacji = literalZGornejKlauzuli.stworzListeUnifikacji(literalZDolnejKlauzuli);
+//		    				System.out.println("Lista unifikacji:\n" + listaUnifikacji);
+		    				throw new WyjatekRezolucji(literalZGornejKlauzuli, literalZDolnejKlauzuli, listaUnifikacji);
+		    			}
+		    		}
+				}
+			} catch (WyjatekRezolucji e) {
+				rezolucjowalny = true;
+				
+				gornaKlauzula.literaly.remove(e.getLiteralZGornejKlauzuli());
+				dolnaKlauzula.literaly.remove(e.getLiteralZDolnejKlauzuli());
+				//TODO zaimplementowac unifikacje
+				
+				if (dolnaKlauzula.literaly.size() + gornaKlauzula.literaly.size() == 0) {
+					return null;
+				}
+				
+//				if (!e.getListaUnifikacji().czyPusta()) {
+//					for (Literal literalZTejKlauzuli : this.literaly) {
+//						literalZTejKlauzuli.przeprowadzUnifikacje(e.getListaUnifikacji());
+//					}
+//					for (Literal literalZInnejKlauzuli : innaKlauzula.literaly) {
+//						literalZInnejKlauzuli.przeprowadzUnifikacje(e.getListaUnifikacji().odwroc());
+//					}
+//				}
+			}
+		}
+		Klauzula powstalaKlauzula = new Klauzula(gornaKlauzula);
+		powstalaKlauzula.dodaj(dolnaKlauzula);
+		
+		return powstalaKlauzula;
+	}
     
 }
 

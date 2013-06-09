@@ -1,5 +1,8 @@
 package pl.edu.pw.elka.maszyna.entity.algorytm;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * Literał, czyli predykat, bądź zaprzeczony predykat
  * @author Michał Toporowski
@@ -51,12 +54,30 @@ public class Literal
     	return wynik;
     }
 
+    /**
+     * Sprawdza czy da sie przeprowadzic rezolucje
+     * @param innyLiteral
+     * @return
+     */
 	public boolean rezolucjowalny(Literal innyLiteral) {
 		
 		if (this.zanegowany == innyLiteral.zanegowany) {
 			return false;
 		}
 		return this.predykat.rezolucjowalny(innyLiteral.predykat);
+	}
+
+	/**
+	 * Tworzy liste unifikacji
+	 * @param literalZInnejKlauzuli
+	 * @return
+	 */
+	public ListaUnifikacji stworzListeUnifikacji(Literal literalZInnejKlauzuli) {
+		return this.predykat.stworzListeUnifikacji(literalZInnejKlauzuli.predykat);
+	}
+
+	public void przeprowadzUnifikacje(ListaUnifikacji listaUnifikacji) {
+		predykat.przeprowadzUnifikacje(listaUnifikacji);
 	}
     
 }
