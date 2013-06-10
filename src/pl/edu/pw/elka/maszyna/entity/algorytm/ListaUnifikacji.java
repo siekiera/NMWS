@@ -40,5 +40,36 @@ public class ListaUnifikacji {
 			return wynik;
 		}
 	}
+
+	/**
+	 * Filtruje tylko te unifikacje, ktore jako drugi argument maja wpisana Stala
+	 * @return
+	 */
+	public ListaUnifikacji doStalych() {
+		//FIXME SPRAWDZIC!!!
+		List<Unifikacja> odfiltrowanaListaUnifikacji = new ArrayList<Unifikacja>();
+		for (Unifikacja unifikacja : listaUnifikacji) {
+			if (Character.isUpperCase(unifikacja.getNazwaArgumentuDrugiegoPredykatu().charAt(0))) {
+				odfiltrowanaListaUnifikacji.add(unifikacja);
+			}
+		}
+		
+		return new ListaUnifikacji(odfiltrowanaListaUnifikacji);
+	}
+
+	/**
+	 * Filtruje tylko te unifikacje, ktore jeko pierwszy argument maja Zmienna, a drugi - Stala
+	 * @return
+	 */
+	public ListaUnifikacji odZmiennychDoStalych() {
+		List<Unifikacja> odfiltrowanaListaUnifikacji = new ArrayList<Unifikacja>();
+		for (Unifikacja unifikacja : listaUnifikacji) {
+			if (Character.isLowerCase(unifikacja.getNazwaArgumentuPierwszegoPredykatu().charAt(0)) && 
+					Character.isUpperCase(unifikacja.getNazwaArgumentuDrugiegoPredykatu().charAt(0))) {
+				odfiltrowanaListaUnifikacji.add(unifikacja);
+			}
+		}
+		return new ListaUnifikacji(odfiltrowanaListaUnifikacji);	
+	}
 	
 }

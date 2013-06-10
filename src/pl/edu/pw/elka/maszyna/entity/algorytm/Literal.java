@@ -18,7 +18,12 @@ public class Literal
         this.zanegowany = zanegowany;
     }
 
-    public Predykat getPredykat()
+    public Literal(Literal literal) {
+    	this.zanegowany = literal.zanegowany;
+    	this.predykat = new Predykat(literal.predykat);
+    }
+
+	public Predykat getPredykat()
     {
         return predykat;
     }

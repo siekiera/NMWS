@@ -15,7 +15,11 @@ class Argument
         this.nazwa = nazwa;
     }
 
-    /**
+    public Argument(Argument argument) {
+    	this.nazwa = argument.nazwa;
+    }
+
+	/**
 	 * @return true - jeśli argument jest zmienną (nazwa zaczyna się małą literą)<br>
 	 * false, jeśli argument jest stałą/obiektem (nazwa zaczyna się wielką literą)
 	 */

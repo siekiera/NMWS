@@ -14,12 +14,20 @@ public class Predykat
 	private final Argument[] argumenty;
 	public Predykat(String nazwa, Argument[] argumenty)
 	{
-		super();
 		this.nazwa = nazwa;
 		this.argumenty = argumenty;
 	}
 
-    /**
+    public Predykat(Predykat predykat) {
+    	this.nazwa = predykat.nazwa;
+    	this.argumenty = new Argument[predykat.argumenty.length];
+    	for (int i = 0; i < argumenty.length; i++) {
+			this.argumenty[i] = new Argument(predykat.argumenty[i]);
+		}
+    
+    }
+
+	/**
      * "Factory method" - ma sparsować napis i wyprodukować predykat
      * @param napis
      * @return
@@ -127,7 +135,9 @@ public class Predykat
 	public void przeprowadzUnifikacje(ListaUnifikacji listaUnifikacji) {
 		for (int i = 0; i < this.argumenty.length; i++) {
 			for (Unifikacja unifikacja : listaUnifikacji.getListaUnifikacji()) {
-				
+				if (argumenty[i].nazwa.equals(unifikacja.getNazwaArgumentuPierwszegoPredykatu())) {
+					argumenty[i].nazwa = unifikacja.getNazwaArgumentuDrugiegoPredykatu();
+				}
 			}
 		}
 	}

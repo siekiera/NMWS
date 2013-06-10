@@ -18,7 +18,10 @@ public class Klauzula
 	public Set<Literal> literaly;
 	
 	public Klauzula(Klauzula klauzula) {
-		literaly = new HashSet<Literal>(klauzula.literaly);
+ 		this.literaly = new HashSet<Literal>();
+		for (Literal literal : klauzula.literaly) {
+			this.literaly.add(new Literal(literal)); 
+		}
 	}
 	
 	/**
@@ -127,20 +130,25 @@ public class Klauzula
 				
 				gornaKlauzula.literaly.remove(e.getLiteralZGornejKlauzuli());
 				dolnaKlauzula.literaly.remove(e.getLiteralZDolnejKlauzuli());
+				
 				//TODO zaimplementowac unifikacje
+				
+				if (!e.getListaUnifikacji().czyPusta()) {
+					ListaUnifikacji odZmiennychDoStalych = e.getListaUnifikacji().odZmiennychDoStalych();
+					for (Literal literalZGornejKlauzuli : gornaKlauzula.literaly) {
+						literalZGornejKlauzuli.przeprowadzUnifikacje(odZmiennychDoStalych);
+					}
+					
+					ListaUnifikacji odwroconaOdZmiennychDoPozostalych = e.getListaUnifikacji().odwroc().odZmiennychDoStalych();
+			    	for (Literal literalZDolnejKlauzuli : dolnaKlauzula.literaly) {
+			    		literalZDolnejKlauzuli.przeprowadzUnifikacje(odwroconaOdZmiennychDoPozostalych);
+//			    		literalZDolnejKlauzuli.przeprowadzUnifikacje(e.getListaUnifikacji().odwroc().doStalych());
+			    	}
+				}
 				
 				if (dolnaKlauzula.literaly.size() + gornaKlauzula.literaly.size() == 0) {
 					return null;
 				}
-				
-//				if (!e.getListaUnifikacji().czyPusta()) {
-//					for (Literal literalZTejKlauzuli : this.literaly) {
-//						literalZTejKlauzuli.przeprowadzUnifikacje(e.getListaUnifikacji());
-//					}
-//					for (Literal literalZInnejKlauzuli : innaKlauzula.literaly) {
-//						literalZInnejKlauzuli.przeprowadzUnifikacje(e.getListaUnifikacji().odwroc());
-//					}
-//				}
 			}
 		}
 		Klauzula powstalaKlauzula = new Klauzula(gornaKlauzula);
