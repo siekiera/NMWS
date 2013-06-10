@@ -71,5 +71,16 @@ public class ListaUnifikacji {
 		}
 		return new ListaUnifikacji(odfiltrowanaListaUnifikacji);	
 	}
+
+	public ListaUnifikacji odZmiennychDoZmiennych() {
+		List<Unifikacja> odfiltrowanaListaUnifikacji = new ArrayList<Unifikacja>();
+		for (Unifikacja unifikacja : listaUnifikacji) {
+			if (Character.isLowerCase(unifikacja.getNazwaArgumentuPierwszegoPredykatu().charAt(0)) && 
+					Character.isLowerCase(unifikacja.getNazwaArgumentuDrugiegoPredykatu().charAt(0))) {
+				odfiltrowanaListaUnifikacji.add(unifikacja);
+			}
+		}
+		return new ListaUnifikacji(odfiltrowanaListaUnifikacji);
+	}
 	
 }

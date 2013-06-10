@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekDawaniaPrawdy;
 import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekRezolucji;
 
 /**
@@ -112,7 +113,7 @@ public class Klauzula
 		Klauzula dolnaKlauzula = new Klauzula(this);
 		
 		boolean rezolucjowalny = true;
-		while (rezolucjowalny) {
+		//while (rezolucjowalny) {
 			rezolucjowalny = false;
 			try {
 				for (Literal literalZGornejKlauzuli : gornaKlauzula.literaly) {
@@ -135,11 +136,13 @@ public class Klauzula
 				
 				if (!e.getListaUnifikacji().czyPusta()) {
 					ListaUnifikacji odZmiennychDoStalych = e.getListaUnifikacji().odZmiennychDoStalych();
+					ListaUnifikacji odZmiennychDoZmiennych = e.getListaUnifikacji().odZmiennychDoZmiennych();
 					for (Literal literalZGornejKlauzuli : gornaKlauzula.literaly) {
 						literalZGornejKlauzuli.przeprowadzUnifikacje(odZmiennychDoStalych);
 					}
 					
 					ListaUnifikacji odwroconaOdZmiennychDoPozostalych = e.getListaUnifikacji().odwroc().odZmiennychDoStalych();
+					ListaUnifikacji odwroconaodZmiennychDoZmiennych = e.getListaUnifikacji().odwroc().odZmiennychDoZmiennych();
 			    	for (Literal literalZDolnejKlauzuli : dolnaKlauzula.literaly) {
 			    		literalZDolnejKlauzuli.przeprowadzUnifikacje(odwroconaOdZmiennychDoPozostalych);
 //			    		literalZDolnejKlauzuli.przeprowadzUnifikacje(e.getListaUnifikacji().odwroc().doStalych());
@@ -150,13 +153,54 @@ public class Klauzula
 					return null;
 				}
 			}
-		}
+		//}
+		gornaKlauzula.usuwaniePrawdy(dolnaKlauzula);
+		
+//		if (dolnaKlauzula.literaly.size() + gornaKlauzula.literaly.size() == 0) {
+//			return new Klauzula(literaly);
+//		}
+		
 		Klauzula powstalaKlauzula = new Klauzula(gornaKlauzula);
 		powstalaKlauzula.dodaj(dolnaKlauzula);
+		
+		System.out.println(powstalaKlauzula);
 		
 		return powstalaKlauzula;
 	}
     
+	private void usuwaniePrawdy(Klauzula innaKlauzula) {
+		
+		boolean dalPrawde = true;
+		while (dalPrawde ) {
+			dalPrawde = false;
+			try {
+				for (Literal literalZGornejKlauzuli : this.literaly) {
+		    		for (Literal literalZDolnejKlauzuli : innaKlauzula.literaly) {
+		    			if (literalZGornejKlauzuli.dajacyPrawde(literalZDolnejKlauzuli)) {
+		    				throw new WyjatekDawaniaPrawdy(literalZGornejKlauzuli, literalZDolnejKlauzuli);
+		    			}
+		    		}
+				}
+			} catch (WyjatekDawaniaPrawdy e) {
+				dalPrawde = true;
+				
+				literaly.remove(e.getLiteralZGornejKlauzuli());
+				innaKlauzula.literaly.remove(e.getLiteralZDolnejKlauzuli());
+				
+				//TODO zaimplementowac unifikacje
+				
+//				if (this.literaly.size() + innaKlauzula.literaly.size() == 0) {
+//					return null;
+//				}
+			}
+		}
+//		Klauzula powstalaKlauzula = new Klauzula(gornaKlauzula);
+//		powstalaKlauzula.dodaj(dolnaKlauzula);
+		
+		
+//		return powstalaKlauzula;
+	}
+	
 }
 
 

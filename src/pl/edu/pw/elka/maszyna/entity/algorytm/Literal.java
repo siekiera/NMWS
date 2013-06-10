@@ -71,6 +71,19 @@ public class Literal
 		}
 		return this.predykat.rezolucjowalny(innyLiteral.predykat);
 	}
+	
+    /**
+     * Sprawdza czy da sie przeprowadzic rezolucje
+     * @param innyLiteral
+     * @return
+     */
+	public boolean dajacyPrawde(Literal innyLiteral) {
+		
+		if (this.zanegowany == innyLiteral.zanegowany) {
+			return false;
+		}
+		return this.predykat.dajacyPrawde(innyLiteral.predykat);
+	}
 
 	/**
 	 * Tworzy liste unifikacji

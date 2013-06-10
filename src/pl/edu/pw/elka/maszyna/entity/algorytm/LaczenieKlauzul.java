@@ -21,4 +21,16 @@ public class LaczenieKlauzul {
 		return false;
 	}
 	
+	public Klauzula getPierwszaKlauzula() {
+		return pierwszaKlauzula;
+	}
+	
+	public Klauzula getDrugaKlauzula() {
+		return drugaKlauzula;
+	}
+	
+	public Klauzula getDzieckoKlauzula() {
+		return dzieckoKlauzula;
+	}
+	
 }

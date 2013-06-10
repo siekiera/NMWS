@@ -6,6 +6,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import pl.edu.pw.elka.maszyna.model.Model;
 import pl.edu.pw.elka.maszyna.widok.Widok;
 import pl.edu.pw.elka.maszyna.widok.ZdarzenieWidoku;
+import pl.edu.pw.elka.maszyna.wspolne.DrzewoWnioskowania;
 import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaNiepoprawnychDanych;
 
 
@@ -46,7 +47,12 @@ public class Kontroler
 				//weź zdarzenie
 				z = kolejkaZdarzen.take();
 				//odpal funkcję modelu robiącą to, co chcemy
-				model.rob(z.getTekst());
+				DrzewoWnioskowania drzewoWnioskowania = model.rob(z.getTekst());
+				if (drzewoWnioskowania == null) {
+					widok.pokazKomunikatONiepowodzeniu();
+				} else {
+					widok.pokazDrzewoWnioskowania(drzewoWnioskowania);
+				}
 				//TODO jak już wywnioskujemy, to przydałoby się zaktualizować widok
 			} catch (InterruptedException e)
 			{

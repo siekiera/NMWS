@@ -48,6 +48,9 @@ class OknoAplikacji extends JFrame
 			{
 				//wyślij tekst do kontrolera (umieść nowe zdarzenie w kolejce)
 				String tekst = poleFaktow.getText();
+				String teza = poleZadania.getText();
+				teza = "\n-(" + teza + ")";
+				tekst += teza;
 				try
 				{
 					kolejkaZdarzen.put(new ZdarzenieWidoku(tekst));
@@ -67,11 +70,11 @@ class OknoAplikacji extends JFrame
 		setSize(ROZMIAR);
 		setTitle("Najmądrzejsza maszyna wnioskująca świata");
 		
-		poleFaktow = new JTextArea();
+		poleFaktow = new JTextArea("A()=B()");
 		poleFaktow.setBorder(BorderFactory.createTitledBorder("Pole dla faktów:"));
 		poleZadania = new JTextArea();
 		poleZadania.setBorder(BorderFactory.createTitledBorder("Pole dla zadania:"));
-		przycisk = new JButton("Wywnioskuj!!!");
+		przycisk = new JButton("Wywnioskuj");
 		
         JSplitPane panelPol = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
                 poleFaktow,

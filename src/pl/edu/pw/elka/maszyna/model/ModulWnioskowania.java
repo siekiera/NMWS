@@ -8,6 +8,8 @@ import pl.edu.pw.elka.maszyna.entity.algorytm.Klauzula;
 import pl.edu.pw.elka.maszyna.entity.algorytm.LaczenieKlauzul;
 import pl.edu.pw.elka.maszyna.entity.algorytm.ListaKlauzul;
 import pl.edu.pw.elka.maszyna.entity.algorytm.Literal;
+import pl.edu.pw.elka.maszyna.wspolne.DrzewoWnioskowania;
+import sun.reflect.generics.tree.Tree;
 
 /**
  * @author lpielasz
@@ -71,6 +73,7 @@ public class ModulWnioskowania
 				klauzule.addAll(dodaneKlauzule);
 			}
 		}
+
 		System.out.println("Nieudowodniono (Nie ma juz co laczyc)");
 		System.out.println("Wszystkie klauzule:");
 		for (Klauzula klauzula : klauzule) {
@@ -118,7 +121,8 @@ public class ModulWnioskowania
 	}
 
 
-	public void pobierzDrzewoWnioskowania() {
+	public DrzewoWnioskowania pobierzDrzewoWnioskowania() {
         //TODO to powinno coś zwracać pewnie trzeba będzie jakiś nowy typ tu zadeklarować
+		return new DrzewoWnioskowania(laczeniaKlauzul);
     }
 }

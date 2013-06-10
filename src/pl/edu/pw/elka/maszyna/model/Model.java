@@ -5,10 +5,9 @@ import java.util.List;
 
 import pl.edu.pw.elka.maszyna.entity.algorytm.ListaKlauzul;
 import pl.edu.pw.elka.maszyna.entity.parser.DrzewoParsowania;
-import pl.edu.pw.elka.maszyna.entity.algorytm.Klauzula;
+import pl.edu.pw.elka.maszyna.wspolne.DrzewoWnioskowania;
 import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaNiepoprawnychDanych;
 import pl.edu.pw.elka.maszyna.wspolne.wyjatki.WyjatekParsowaniaPustejLinii;
-import sun.security.krb5.internal.KrbErrException;
 
 /**
  * Model MVC
@@ -27,7 +26,7 @@ public class Model
 	 * @param tekstWejsciowy
 	 * @throws WyjatekParsowaniaNiepoprawnychDanych 
 	 */
-	public void rob(final String tekstWejsciowy) throws WyjatekParsowaniaNiepoprawnychDanych
+	public DrzewoWnioskowania rob(final String tekstWejsciowy) throws WyjatekParsowaniaNiepoprawnychDanych
 	{
 		//to powinno podzielić tekst na linie
 		String zdania[] = tekstWejsciowy.split("\\r?\\n");
@@ -52,8 +51,12 @@ public class Model
 		ListaKlauzul listaKlauzul = kreatorKlauzul.drzewaNaKlauzule(las);
 		//wnioskujemy
         ModulWnioskowania modulWnioskowania = new ModulWnioskowania();
-        modulWnioskowania.wnioskuj(listaKlauzul);
-        modulWnioskowania.pobierzDrzewoWnioskowania();
+        if (modulWnioskowania.wnioskuj(listaKlauzul)) {
+        	return modulWnioskowania.pobierzDrzewoWnioskowania();
+        }
+        else {
+        	return null;
+        }
 		
 		//TODO no i teraz to pewnie powinno coś zwrócić, tudzież zakomunikować, że się udało lub nie
 		

@@ -141,6 +141,34 @@ public class Predykat
 			}
 		}
 	}
+
+	public boolean dajacyPrawde(Predykat innyPredykat) {
+		if (!this.nazwa.equals(innyPredykat.nazwa)) {
+			return false;
+		}
+		
+		if (this.argumenty.length != innyPredykat.argumenty.length) {
+			return false;
+		}
+		
+		if (this.argumenty.length == 0) {
+			return true;
+		}
+		
+		for (int i = 0; i < this.argumenty.length; i++) {
+			if (this.argumenty[i].czyStala() && innyPredykat.argumenty[i].czyStala()) {
+				if (!this.argumenty[i].equals(innyPredykat.argumenty[i])) {
+					return false;
+				}
+			}
+			
+			if ((this.argumenty[i].czyZmienna() && innyPredykat.argumenty[i].czyStala()) ||
+					(this.argumenty[i].czyStala() && innyPredykat.argumenty[i].czyZmienna())) {
+					return false;
+			}
+		}
+		return true;
+	}
 	
 }
 
